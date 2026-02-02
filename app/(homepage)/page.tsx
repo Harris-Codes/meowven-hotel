@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Home() {
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900 font-sans">
@@ -7,14 +8,14 @@ export default function Home() {
       {/* 2. HERO SECTION */}
       <section className="flex flex-col items-center justify-center text-center py-20 px-6 bg-gradient-to-b from-orange-50 to-stone-50">
         <h1 className="text-5xl md:text-6xl font-extrabold text-stone-800 leading-tight">
-          Welcome to <span className="text-orange-600">Meowven</span>
+          Welcome to <span className="text-orange-600">🐾Meowven</span>
         </h1>
         <p className="mt-4 text-xl text-stone-600 max-w-2xl">
           The Purr-fect Getaway – Luxury boarding and grooming for the sophisticated feline.
         </p>
-        <button className="mt-8 bg-orange-600 text-white text-lg px-8 py-4 rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
+        <Link href="/login" className="mt-8 bg-orange-600 text-white text-lg px-8 py-4 rounded-full font-bold shadow-lg hover:scale-105 transition-transform">
           BOOK STAY NOW
-        </button>
+        </Link>
       </section>
 
       {/* 3. SERVICES GRID */}
