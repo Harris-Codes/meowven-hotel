@@ -4,19 +4,19 @@ const services = [
   {
     title: "Grooming",
     description:
-      "Give your cat the royal treatment with our low-stress grooming sessions...",
+      "Give your cat the royal treatment with our low-stress groomingsessions. We specialize in delicate coat care, de-shedding, and precision styling to keep your feline friend looking and feeling their absolute best",
     image: "/images/cat-grooming.jpg",
   },
   {
     title: "Boarding",
     description:
-      "Leave your worries at the door. Our climate-controlled private suites...",
+      "Leave your worries at the door. Our climate-controlled private suites offer a peaceful, home-like environment with individualized attention, premium bedding, and daily wellness checks while you're away",
     image: "/images/cat-boarding.jpg",
   },
   {
     title: "Daycare",
     description:
-      "The perfect solution for active cats. Our daycare provides a stimulating...",
+      "The perfect solution for active cats. Our daycare provides a stimulating environment filled with climbing structures, supervised play, and cozy nap corners to ensure your cat stays engaged and happy during the day",
     image: "/images/cat-daycare3.jpg",
   },
 ];
@@ -82,11 +82,11 @@ export default function Home() {
 
       {/* 4.Smart way of mapping services instead of repeating the same thing */}
       {services.map((service, index) => (
-        <section
+        <section id="services"
           key={service.title}
-          className={`flex items-center border-y-4 border-orange-600 ${
+          className={`flex items-center  ${
             index % 2 === 0
-              ? "flex-col md:flex-row"
+              ? "flex-col md:flex-row border-y-4 border-orange-600"
               : "flex-col md:flex-row-reverse"
           }`}
         >
