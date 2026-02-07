@@ -1,4 +1,6 @@
+@import url('https://cdn-uicons.flaticon.com/2.1.0/uicons-bold-straight/css/uicons-bold-straight.css');
 @import "tailwindcss";
+
 html {
   scroll-behavior: smooth;
 }
