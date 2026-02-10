@@ -23,8 +23,8 @@ export default function dashboard() {
   ];
 
   return (
-    <div className="p-8 min-h-dvh bg-orange-600/85">
-      <h1 className="mt-8 text-white text-4xl md:text-7xl font-bold ">Hello, Harris!</h1>
+    <div className="p-8 min-h-screen bg-orange-600/85">
+      <h1 className="mt-15 md:mt-2 text-white text-4xl md:text-7xl font-bold ">Hello, Harris!</h1>
       <p className="text-stone-200 text-lg">
         Your furry friends are waiting for you.
       </p>
@@ -63,7 +63,7 @@ export default function dashboard() {
 
         {/* --- UPCOMING BOOKINGS SECTION --- */}
         <div className="mt-12 bg-white rounded-3xl shadow-sm border border-stone-100 overflow-hidden">
-          <h1 className="p-5 text-2xl font-bold text-orange-600">Upcoming Bookings</h1>
+          <h1 className="p-5 text-2xl font-bold text-orange-600">My Bookings</h1>
           <div className="overflow-x-auto">
             {" "}
             {/* This makes it responsive on mobile view */}
