@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
+
 import ServiceCard from "@/components/ServiceCard";
 import GroBookingModal from "@/components/modals/GroBookingModal";
 export default function GroomingPage() {
@@ -45,7 +45,7 @@ export default function GroomingPage() {
       <h1 className="mt-15 md:mt-2 text-white text-4xl md:text-7xl font-bold ">
         Grooming Service
       </h1>
-      <p className="p-4 text-white text-lg">
+      <p className="mt-4 text-white text-lg">
         Please select a grooming service to book
       </p>
 

@@ -33,7 +33,7 @@ export default function Dashboard() {
       <h1 className="mt-15 md:mt-2 text-white text-4xl md:text-7xl font-bold ">
         Hello, Harris!
       </h1>
-      <p className="text-stone-200 text-lg">
+      <p className="mt-4 text-white text-lg">
         Your furry friends are waiting for you.
       </p>
 
