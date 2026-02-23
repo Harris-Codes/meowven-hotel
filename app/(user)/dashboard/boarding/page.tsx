@@ -10,7 +10,18 @@ export default function BoardingPage() {
     { id: 1, name: "Zen", image: "/images/Zen.jpg" },
     { id: 2, name: "Opi", image: "/images/Opi.jpg" },
   ];
-  const [selectedCat, setSelectedCat] = useState<number | null>(null);
+
+  const toggleCat = (id: number) => {
+    setSelectedCats((prev) => {
+      // If the cat is already in the array, remove it (filter)
+      if (prev.includes(id)) {
+        return prev.filter((catId) => catId !== id);
+      }
+      // If it's not there, add it to the array (spread)
+      return [...prev, id];
+    });
+  };
+  const [selectedCats, setSelectedCats] = useState<number[]>([]);
   const boardingRooms = [
     {
       id: 1,
@@ -67,8 +78,8 @@ export default function BoardingPage() {
         isOpen={ModalOpen}
         onClose={() => setModalOpen(false)}
         cats={myCats}
-        selectedCat={selectedCat}
-        onSelectCat={setSelectedCat}
+        selectedCats={selectedCats} // Passing the array
+        onToggleCat={toggleCat} // Passing the function
       />
     </div>
   );

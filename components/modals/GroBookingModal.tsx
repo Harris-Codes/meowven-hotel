@@ -4,7 +4,6 @@ import { useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import dayjs, { Dayjs } from "dayjs";
 
@@ -20,14 +19,26 @@ interface GroBookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   cats: Cat[];
-  selectedCat: number | null; //Keep track of who is selected
-  onSelectCat: (id: number) => void; // Function to change the selection
+  selectedCats: number[];
+  onToggleCat: (id: number) => void;
 }
 
+// 1. Move your theme definition outside the component
 const meowvenTheme = createTheme({
   palette: {
     primary: {
-      main: "#ff6a00", // This is your exact orange!
+      main: "#ff6a00",
+    },
+  },
+  components: {
+    MuiInputAdornment: {
+      styleOverrides: {
+        root: {
+          "& .MuiSvgIcon-root": {
+            color: "#ff6a00 !important",
+          },
+        },
+      },
     },
   },
 });
@@ -36,14 +47,14 @@ export default function GroBookingModal({
   isOpen,
   onClose,
   cats,
-  selectedCat,
-  onSelectCat,
+  selectedCats,
+  onToggleCat,
 }: GroBookingModalProps) {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
   const isFormValid =
-    selectedCat !== null && selectedDate !== null && selectedTime !== null;
+    selectedCats.length > 0 && selectedDate !== null && selectedTime !== null;
 
   if (!isOpen) return null;
 
@@ -61,11 +72,11 @@ export default function GroBookingModal({
             <form className="space-y-5">
               <div className="flex flex-wrap items-center gap-6 md:gap-10">
                 {cats.map((cat) => {
-                  const isSelected = selectedCat === cat.id;
+                  const isSelected = selectedCats?.includes(cat.id) || false;
                   return (
                     <div
                       key={cat.id}
-                      onClick={() => onSelectCat(cat.id)}
+                      onClick={() => onToggleCat(cat.id)}
                       className="flex flex-col items-center gap-3 cursor-pointer group"
                     >
                       {/* Select Cat for Booking */}
@@ -108,10 +119,23 @@ export default function GroBookingModal({
                   onChange={(newValue) => setSelectedDate(newValue)}
                   disablePast
                   shouldDisableDate={(date) => date.day() === 0} // Blocks Sundays
+                  format="DD/MM/YYYY"
                   slotProps={{
                     textField: {
                       fullWidth: true,
+                    },
 
+                    day: {
+                      sx: {
+                        "&.MuiPickersDay-root.Mui-selected": {
+                          backgroundColor: "#ff6a00 !important", // Use your Meowven Orange!
+                          color: "white",
+                        },
+                        "&.MuiPickersDay-root:hover": {
+                          backgroundColor: "#ea580c !important", // Hover color for the circles
+                          color: "white",
+                        },
+                      },
                     },
                   }}
                 />
@@ -142,9 +166,9 @@ export default function GroBookingModal({
                 onClick={() => {
                   console.log(
                     "Booking for Cat ID:",
-                    selectedCat,
+                    selectedCats,
                     "on",
-                    selectedDate?.format("MMMM D, YYYY"),
+                    selectedDate?.format("D/M/YYYY"),
                     "at",
                     selectedTime,
                   );
@@ -165,7 +189,7 @@ export default function GroBookingModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="w-24 py-3 bg-stone-300 hover:bg-red-600 text-white rounded-xl transition-colors"
+                className="w-24 py-2 font-bold text-stone-400 hover:text-white hover:bg-red-500 rounded-xl  transition-colors"
               >
                 Cancel
               </button>

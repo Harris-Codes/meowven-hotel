@@ -4,12 +4,25 @@ import { useState } from "react";
 import ServiceCard from "@/components/ServiceCard";
 import GroBookingModal from "@/components/modals/GroBookingModal";
 export default function GroomingPage() {
-  const [selectedCat, setSelectedCat] = useState<number | null>(null);
+
   const [ModalOpen, setModalOpen] = useState(false);
   const myCats = [
     { id: 1, name: "Zen", image: "/images/Zen.jpg" },
     { id: 2, name: "Opi", image: "/images/Opi.jpg" },
   ];
+
+  const toggleCat = (id: number) => {
+    setSelectedCats((prev) => {
+      // If the cat is already in the array, remove it (filter)
+      if (prev.includes(id)) {
+        return prev.filter((catId) => catId !== id);
+      }
+      // If it's not there, add it to the array (spread)
+      return [...prev, id];
+    });
+  };
+
+  const [selectedCats, setSelectedCats] = useState<number[]>([]);
   const GroomingServices = [
     {
       id: 1,
@@ -72,8 +85,8 @@ export default function GroomingPage() {
         isOpen={ModalOpen}
         onClose={() => setModalOpen(false)}
         cats={myCats}
-        selectedCat={selectedCat}
-        onSelectCat={setSelectedCat}
+        selectedCats={selectedCats}
+        onToggleCat={toggleCat}
       />
     </div>
   );
